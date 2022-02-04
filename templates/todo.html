@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!-- CSS only -->
+<link href="style.css" rel="stylesheet" >
+    <title>Todo List</title>
+</head>
+<body>
+<h2>Todo List</h2>
+
+<table>
+    <tr>
+        <th>Todo Item Name</th>
+        <th>Due Date</th>
+        <th>Started</th>
+        <th>Toggle</th>
+        <th>Delete</th>
+    </tr>
+    {% for record in Items %}
+        <tr>
+            <td>{{ record.todo_item }}</td>
+            <td>{{ record.completion_date_string() }}</td>
+            <td>{{ record.item_stared }}</td>
+            <td>
+                <form action="/" method="post">
+                    <button name="toggle" value="{{ record.get_unique_id() }}">Toggle</button>
+                </form>
+            </td>
+            <td>
+                <form action="/delete" method="post">
+                    <button name="delete" value="{{ record.get_unique_id() }}">Delete</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+
+
+</table>
+<a href="/addNewItem" target="_blank">Add New Item</a>
+
+</body>
+</html>
